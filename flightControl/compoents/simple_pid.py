@@ -30,7 +30,7 @@ class PID(object):
             kp=1.0,
             ki=0.0,
             kd=0.0,
-            setpoint=0,
+            set_point=0,
             sample_time=0.01,
             output_limits=(None, None),
             auto_mode=True,
@@ -42,7 +42,7 @@ class PID(object):
         param kp: The value for the proportional gain Kp
         param ki: The value for the integral gain Ki
         param kd: The value for the derivative gain Kd
-        param setpoint: The initial setpoint that the PID will try to achieve
+        param set_point: The initial set_point that the PID will try to achieve
         param sample_time: The time in seconds which the controller should wait before generating
             a new output value. The PID works best when it is constantly called (eg. during a
             loop), but with a sample time set so that the time difference between each update is
@@ -60,7 +60,7 @@ class PID(object):
         param error_map: Function to transform the error value in another constrained value.
         """
         self.Kp, self.Ki, self.Kd = kp, ki, kd
-        self.setpoint = setpoint
+        self.set_point = set_point
         self.sample_time = sample_time
 
         self._min_output, self._max_output = None, None
@@ -85,7 +85,7 @@ class PID(object):
         Call the PID controller with *input_* and calculate and return a control output if
         sample_time seconds has passed since the last update. If no new output is calculated,
         return the previous output instead (or None if no value has been calculated yet).
-        :param dt: If set, uses this value for timestep instead of real time. This can be used in
+        :param dt: If set, uses this value for time_step instead of real time. This can be used in
             simulations when simulation time is different from real time.
         """
         if not self.auto_mode:
@@ -102,7 +102,7 @@ class PID(object):
             return self._last_output
 
         # Compute error terms
-        error = self.setpoint - input_
+        error = self.set_point - input_
         d_input = input_ - (self._last_input if (self._last_input is not None) else input_)
 
         # Check if we must map the error
@@ -138,7 +138,7 @@ class PID(object):
         return (
             '{self.__class__.__name__}('
             'Kp={self.Kp!r}, Ki={self.Ki!r}, Kd={self.Kd!r}, '
-            'setpoint={self.setpoint!r}, sample_time={self.sample_time!r}, '
+            'set_point={self.set_point!r}, sample_time={self.sample_time!r}, '
             'output_limits={self.output_limits!r}, auto_mode={self.auto_mode!r}, '
             'proportional_on_measurement={self.proportional_on_measurement!r},'
             'error_map={self.error_map!r}'

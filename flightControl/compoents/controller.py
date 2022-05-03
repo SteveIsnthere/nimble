@@ -1,6 +1,6 @@
 from flightControl.compoents.simple_pid import PID
 
-from flightControl.compoents.helpers import Helpers
+from util.helpers import Helpers
 
 
 class Controller:
@@ -37,7 +37,7 @@ class Controller:
 
     def get_output(self):
         self.pid.sample_time = self.delta_time
-        self.pid.setpoint = self.targetReading
+        self.pid.set_point = self.targetReading
         output = self.pid(self.currentReading)
         return output
 

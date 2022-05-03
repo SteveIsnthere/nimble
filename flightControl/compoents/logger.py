@@ -5,7 +5,7 @@ import time
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
-from flightControl.compoents.helpers import Helpers
+from util.helpers import Helpers
 
 
 class DataEntry:
