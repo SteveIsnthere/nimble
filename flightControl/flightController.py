@@ -16,11 +16,14 @@ class FlightController:
         self.controller_2 = HeadingController(self.interface, self.logger)  # AileronController(interface, logger)
         self.throttle_controller = ThrottleController(self.interface, self.logger)
 
-    def a(self):
+    def start(self):
         while self.running:
             time.sleep(0.01)
-            controller_1.update(3000)
-            controller_2.update(100)
-            throttle_controller.update(150)
+            self.controller_1.update(3000)
+            self.controller_2.update(100)
+            self.throttle_controller.update(150)
 
-        logger.save()
+        self.logger.save()
+
+    def stop(self):
+        self.running = False

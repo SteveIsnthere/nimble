@@ -1,11 +1,6 @@
-import signal
+from flightControl.flightController import FlightController
+from util.util import UtilHandler
 
-running = True
 controller = FlightController()
-controller
-def signal_handler(s, frame):
-    global running
-    running = False
-
-
-signal.signal(signal.SIGINT, signal_handler)
+utilHandler = UtilHandler(controller)
+controller.start()
