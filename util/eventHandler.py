@@ -1,7 +1,7 @@
 import signal
 
 
-class UtilHandler:
+class EventHandler:
 
     def __init__(self, controller):
         self.controller = controller

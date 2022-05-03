@@ -24,20 +24,25 @@ class DataColumn:
 
 
 class Logger:
+    MAX_ENTRY_PER_SAVE = 100000
+
     def __init__(self):
         self.logs = []
+        self.data_entry_count = 0
+        self.chunk_number = 0
         self.starting_time = time.time()
 
     def update(self, unit_name, data_type, content):
+        self.data_entry_count += 1
         self.logs.append(DataEntry(unit_name, data_type, content))
+        if self.data_entry_count >= self.MAX_ENTRY_PER_SAVE:
+            self.free_ram()
 
-    def get_unit_names_list(self):
-        unit_names_list = []
-        for entry in self.logs:
-            if entry.unit_name not in unit_names_list:
-                unit_names_list.append(entry.unit_name)
-
-        return unit_names_list
+    def free_ram(self):
+        self.chunk_number += 1
+        self.logs = []
+        self.data_entry_count = 0
+        return
 
     def save_to_pdf(self, file_name):
         data_to_plot = self.get_sorted_data()
@@ -65,10 +70,34 @@ class Logger:
 
     def get_sorted_data(self):
         result = []
-        unit_names_list = self.get_unit_names_list()
+
+        def get_unit_names_list(log):
+            names_list = []
+            for e in log:
+                if e.unit_name not in names_list:
+                    names_list.append(e.unit_name)
+
+            return names_list
+
+        unit_names_list = get_unit_names_list(self.logs)
+
+        def get_unit_data_types_list(entries):
+            types_list = []
+            for e in entries:
+                if e.data_type not in types_list:
+                    types_list.append(e.data_type)
+            return types_list
+
+        def get_all_entries_of_unit(log, name):
+            all_entries = []
+            for e in log:
+                if e.unit_name == name:
+                    all_entries.append(e)
+            return all_entries
+
         for unit_name in unit_names_list:
-            all_entries_of_unit = self.get_all_entries_of_unit(unit_name)
-            unit_data_types_list = self.get_unit_data_types_list(all_entries_of_unit)
+            all_entries_of_unit = get_all_entries_of_unit(self.logs, unit_name)
+            unit_data_types_list = get_unit_data_types_list(all_entries_of_unit)
             for data_type in unit_data_types_list:
                 title = unit_name + "_" + data_type
                 time_codes = []
@@ -80,21 +109,6 @@ class Logger:
                 data_column = DataColumn(title, time_codes, data)
                 result.append(data_column)
         return result
-
-    @staticmethod
-    def get_unit_data_types_list(all_entries_of_unit):
-        unit_data_types_list = []
-        for entry in all_entries_of_unit:
-            if entry.data_type not in unit_data_types_list:
-                unit_data_types_list.append(entry.data_type)
-        return unit_data_types_list
-
-    def get_all_entries_of_unit(self, unit_name):
-        all_entries = []
-        for entry in self.logs:
-            if entry.unit_name == unit_name:
-                all_entries.append(entry)
-        return all_entries
 
     def serialize(self, file_name):
         file_name = file_name + ".pickle"
@@ -112,3 +126,4 @@ class Logger:
         self.serialize(path + "/" + "serialized")
         self.save_to_pdf(path + "/" + "plots")
         print("saved as " + path)
+        print(self.data_entry_count)

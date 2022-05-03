@@ -1,6 +1,6 @@
 from flightControl.flightController import FlightController
-from util.util import UtilHandler
+from util.eventHandler import EventHandler
 
 controller = FlightController()
-utilHandler = UtilHandler(controller)
+utilHandler = EventHandler(controller)
 controller.start()

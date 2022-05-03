@@ -12,7 +12,7 @@ test_controller = TestController(interface, logger)
 data_points_count = 0
 target = 0
 while data_points_count < data_points_needed:
-    time.sleep(0.01)
+    time.sleep(0.0001)
     if data_points_count == round(data_points_needed / 4):
         target = 50
         print("25%")

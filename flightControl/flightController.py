@@ -23,7 +23,6 @@ class FlightController:
             self.controller_2.update(100)
             self.throttle_controller.update(150)
 
-        self.logger.save()
-
     def stop(self):
         self.running = False
+        self.logger.save()
