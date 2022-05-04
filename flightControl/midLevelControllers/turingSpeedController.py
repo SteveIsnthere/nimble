@@ -15,7 +15,7 @@ class TurningSpeedController(Controller):
         self.last_heading = 0
         self.current_turning_speed = 0
         self.last_turning_speed = 0
-        self.pid.tunings = (10, 0, 0.5)
+        self.pid.tunings = (7, 0, 0.1)
 
     def get_current_reading(self):
         self.last_heading = self.current_heading

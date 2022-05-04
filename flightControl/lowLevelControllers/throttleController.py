@@ -8,7 +8,7 @@ class ThrottleController(Controller):
     def __init__(self, interface, logger):
         super().__init__("ThrottleController", interface, logger, self.default_throttle_min_output,
                          self.default_throttle_max_output)
-        self.pid.tunings = (0.03, 0.001, 0.1)
+        self.pid.tunings = (0.03, 0.001, 0.005)
 
     def get_current_reading(self):
         return self.interface.horizontal_speed

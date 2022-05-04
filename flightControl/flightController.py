@@ -19,7 +19,7 @@ class FlightController:
     def start(self):
         while self.running:
             time.sleep(0.01)
-            self.controller_1.update(3000)
+            self.controller_1.update(1000)
             self.controller_2.update(100)
             self.throttle_controller.update(150)
 

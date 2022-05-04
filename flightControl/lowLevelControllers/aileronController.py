@@ -8,7 +8,7 @@ class AileronController(Controller):
     def __init__(self, interface, logger):
         super().__init__("AileronController", interface, logger, self.default_aileron_min_output,
                          self.default_aileron_max_output)
-        self.pid.tunings = (0.008, 0.0001, 0.0045)
+        self.pid.tunings = (0.0055, 0.0001, 0.0005)
 
     @property
     def current_reading_change_rate(self):

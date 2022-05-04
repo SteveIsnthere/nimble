@@ -11,7 +11,7 @@ class LevelChangeController(Controller):
         super().__init__("LevelChangeController", interface, logger, self.default_min_output,
                          self.default_max_output)
         self.elevatorController = ElevatorController(interface, logger)
-        self.pid.tunings = (5, 0.3, 0.8)
+        self.pid.tunings = (5, 0.3, 0.3)
 
     def get_current_reading(self):
         return self.interface.horizontal_speed

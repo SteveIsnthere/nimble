@@ -46,9 +46,9 @@ class KSP:
     def horizontal_speed(self):
         return self.flight.horizontal_speed
 
-    @property
-    def vertical_speed(self):
-        return self.flight.vertical_speed
+    # @property
+    # def vertical_speed(self):
+    #     return self.flight.vertical_speed
 
     @property
     def longitude(self):
