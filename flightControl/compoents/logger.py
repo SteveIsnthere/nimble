@@ -1,5 +1,6 @@
 import os
 import pickle
+import shutil
 import time
 
 from matplotlib import pyplot as plt
@@ -24,13 +25,25 @@ class DataColumn:
 
 
 class Logger:
-    MAX_ENTRY_PER_SAVE = 100000
+    MAX_ENTRY_PER_SAVE = 50000
 
     def __init__(self):
         self.logs = []
         self.data_entry_count = 0
         self.chunk_number = 0
         self.starting_time = time.time()
+
+    @property
+    def saving_path(self):
+        time_stamp = Helpers.date_string(self.starting_time)
+        package_name = time_stamp
+        data_folder_name = "data"
+        if not os.path.exists(data_folder_name):
+            os.mkdir(data_folder_name)
+        path = data_folder_name + "/" + package_name
+        if not os.path.exists(path):
+            os.mkdir(path)
+        return path
 
     def update(self, unit_name, data_type, content):
         self.data_entry_count += 1
@@ -39,6 +52,10 @@ class Logger:
             self.free_ram()
 
     def free_ram(self):
+        path = self.saving_path + "/chunks"
+        if not os.path.exists(path):
+            os.mkdir(path)
+        self.serialize(path + "/" + str(self.chunk_number))
         self.chunk_number += 1
         self.logs = []
         self.data_entry_count = 0
@@ -116,14 +133,21 @@ class Logger:
         pickle.dump(self, file)
 
     def save(self):
-        time_stamp = Helpers.date_string(self.starting_time)
-        package_name = time_stamp
-        data_folder_name = "data"
-        if not os.path.exists(data_folder_name):
-            os.mkdir(data_folder_name)
-        path = data_folder_name + "/" + package_name
-        os.mkdir(path)
+        path = self.saving_path
+        if os.path.exists(path + "/chunks"):
+            _, _, files = next(os.walk(path + "/chunks"))
+            chunks_count = len(files)
+            logs_in_chunks = []
+            for i in range(chunks_count):
+                file = open(path + "/chunks/" + str(i) + ".pickle", 'rb')
+                chunk = pickle.load(file)
+                logs_in_chunks.extend(chunk.logs)
+            current_logs = self.logs
+            self.logs = logs_in_chunks
+            self.logs.extend(current_logs)
+            shutil.rmtree(path + "/chunks")
+
         self.serialize(path + "/" + "serialized")
         self.save_to_pdf(path + "/" + "plots")
         print("saved as " + path)
-        print(self.data_entry_count)
+
