@@ -4,8 +4,8 @@ from flightControl.midLevelControllers.verticalSpeedController import VerticalSp
 
 class AltitudeController(Controller):
     # feed:alt out:vSpeed
-    default_min_output = -30
-    default_max_output = 20
+    default_min_output = -50
+    default_max_output = 35
 
     def __init__(self, interface, logger):
         super().__init__("AltitudeController", interface, logger, self.default_min_output,
