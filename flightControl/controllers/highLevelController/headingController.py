@@ -1,5 +1,5 @@
 from flightControl.compoents.controller import Controller
-from flightControl.midLevelControllers.turingSpeedController import TurningSpeedController
+from flightControl.controllers.midLevelControllers.turingSpeedController import TurningSpeedController
 
 
 class HeadingController(Controller):

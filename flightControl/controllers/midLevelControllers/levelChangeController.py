@@ -1,5 +1,5 @@
 from flightControl.compoents.controller import Controller
-from flightControl.lowLevelControllers.elevatorController import ElevatorController
+from flightControl.controllers.lowLevelControllers.elevatorController import ElevatorController
 
 
 class LevelChangeController(Controller):

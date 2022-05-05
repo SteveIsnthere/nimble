@@ -1,5 +1,5 @@
 from flightControl.compoents.controller import Controller
-from flightControl.midLevelControllers.verticalSpeedController import VerticalSpeedController
+from flightControl.controllers.midLevelControllers.verticalSpeedController import VerticalSpeedController
 
 
 class AltitudeController(Controller):

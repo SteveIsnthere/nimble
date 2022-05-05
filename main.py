@@ -1,7 +1,8 @@
 import threading
 from flightControl.flightController import FlightController
-from util.eventHandler import EventHandler
+from util.utilHandler import UtilHandler
 
 controller = FlightController()
-utilHandler = EventHandler(controller)
-threading.Thread(target=controller.start()).start()
+util_handler = UtilHandler(controller)
+threading.Thread(target=controller.start).start()
+util_handler.start()

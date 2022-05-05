@@ -1,5 +1,5 @@
 from flightControl.compoents.controller import Controller
-from flightControl.lowLevelControllers.aileronController import AileronController
+from flightControl.controllers.lowLevelControllers.aileronController import AileronController
 
 
 class TurningSpeedController(Controller):

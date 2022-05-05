@@ -1,7 +1,7 @@
 import time
 
 from flightControl.compoents.logger import Logger
-from flightControl.test.controllerTest import TestInterface, TestController
+from flightControl.controllers.test.controllerTest import TestInterface, TestController
 
 data_points_needed = 504
 interface = TestInterface()

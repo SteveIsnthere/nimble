@@ -2,7 +2,9 @@ from tkinter import *
 
 
 class UI:
-    def __init__(self):
+    def __init__(self, util_handler):
+        self.util_handler = util_handler
+
         body = Tk()
         var = StringVar()
         var.set("world")
@@ -13,6 +15,8 @@ class UI:
 
         def on_click():
             var.set("shit")
+            util_handler.stop()
+            body.destroy()
 
         button = Button(body, text="button", command=on_click)
 
