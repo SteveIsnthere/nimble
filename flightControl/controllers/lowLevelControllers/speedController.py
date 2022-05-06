@@ -1,12 +1,12 @@
 from flightControl.compoents.controller import Controller
 
 
-class ThrottleController(Controller):
+class SpeedController(Controller):
     default_throttle_min_output = 0
     default_throttle_max_output = 1
 
     def __init__(self, interface, logger):
-        super().__init__("ThrottleController", interface, logger, self.default_throttle_min_output,
+        super().__init__("SpeedController", interface, logger, self.default_throttle_min_output,
                          self.default_throttle_max_output)
         self.pid.tunings = (0.03, 0.001, 0.005)
 

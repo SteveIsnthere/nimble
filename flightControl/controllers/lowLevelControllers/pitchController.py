@@ -1,12 +1,12 @@
 from flightControl.compoents.controller import Controller
 
 
-class ElevatorController(Controller):
+class PitchController(Controller):
     default_elevator_min_output = -1
     default_elevator_max_output = 1
 
     def __init__(self, interface, logger):
-        super().__init__("ElevatorController", interface, logger, self.default_elevator_min_output,
+        super().__init__("PitchController", interface, logger, self.default_elevator_min_output,
                          self.default_elevator_max_output)
         self.pid.tunings = (0.03, 0.002, 0.01)
 

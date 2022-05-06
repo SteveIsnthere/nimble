@@ -1,5 +1,5 @@
 from flightControl.compoents.controller import Controller
-from flightControl.controllers.lowLevelControllers.elevatorController import ElevatorController
+from flightControl.controllers.lowLevelControllers.pitchController import PitchController
 
 
 class LevelChangeController(Controller):
@@ -10,7 +10,7 @@ class LevelChangeController(Controller):
     def __init__(self, interface, logger):
         super().__init__("LevelChangeController", interface, logger, self.default_min_output,
                          self.default_max_output)
-        self.elevatorController = ElevatorController(interface, logger)
+        self.elevatorController = PitchController(interface, logger)
         self.pid.tunings = (5, 0.3, 0.3)
 
     def get_current_reading(self):

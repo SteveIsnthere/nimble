@@ -13,6 +13,9 @@ class AdvanceMode:
         self.toggled_on = not self.toggled_on
         return True
 
+    def is_on(self):
+        return self.toggled_on
+
     def control(self):
         raise Exception('please override this method')
 

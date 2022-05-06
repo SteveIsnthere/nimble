@@ -1,4 +1,5 @@
 import signal
+import threading
 
 from util.gui import UI
 
@@ -8,16 +9,16 @@ class UtilHandler:
     def __init__(self, controller):
         self.controller = controller
 
-        # noinspection PyUnusedLocal
-        def signal_handler(s, frame):
-            print("signal.SIGINT handled")
-            self.stop()
-
-        signal.signal(signal.SIGINT, signal_handler)
-
     def start(self):
         UI(self)
 
-    def stop(self):
-        print("clicked")
-        self.controller.stop()
+    def controller_state(self):
+        return self.controller.is_running()
+
+    def switch_on_controller(self):
+        if not self.controller_state():
+            threading.Thread(target=self.controller.start).start()
+
+    def switch_off_controller(self):
+        if self.controller_state():
+            self.controller.stop()

@@ -1,5 +1,5 @@
 from flightControl.compoents.controller import Controller
-from flightControl.controllers.lowLevelControllers.aileronController import AileronController
+from flightControl.controllers.lowLevelControllers.rollController import RollController
 
 
 class TurningSpeedController(Controller):
@@ -10,7 +10,7 @@ class TurningSpeedController(Controller):
     def __init__(self, interface, logger):
         super().__init__("TurningSpeedController", interface, logger, self.default_min_output,
                          self.default_max_output)
-        self.aileronController = AileronController(interface, logger)
+        self.aileronController = RollController(interface, logger)
         self.current_heading = self.interface.heading
         self.last_heading = 0
         self.current_turning_speed = 0

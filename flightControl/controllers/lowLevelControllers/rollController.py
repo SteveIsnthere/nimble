@@ -1,12 +1,12 @@
 from flightControl.compoents.controller import Controller
 
 
-class AileronController(Controller):
+class RollController(Controller):
     default_aileron_min_output = -1
     default_aileron_max_output = 1
 
     def __init__(self, interface, logger):
-        super().__init__("AileronController", interface, logger, self.default_aileron_min_output,
+        super().__init__("RollController", interface, logger, self.default_aileron_min_output,
                          self.default_aileron_max_output)
         self.pid.tunings = (0.0055, 0.0001, 0.0005)
 
