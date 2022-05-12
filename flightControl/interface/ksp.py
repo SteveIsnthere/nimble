@@ -2,8 +2,10 @@ from math import pi
 
 import krpc
 
+from flightControl.interface.interface import Interface
 
-class KSP:
+
+class KSP_Interface(Interface):
     def __init__(self):
         self.conn = krpc.connect(name='sim')
         self.vessel = self.conn.space_center.active_vessel

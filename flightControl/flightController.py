@@ -1,4 +1,5 @@
 import time
+
 from flightControl.advancemodes.alt import ALT
 from flightControl.advancemodes.app import APP
 from flightControl.advancemodes.hdg import HDG
@@ -8,19 +9,21 @@ from flightControl.advancemodes.spd import SPD
 from flightControl.advancemodes.toga import TOGA
 from flightControl.advancemodes.vs import VS
 from flightControl.compoents.logger import Logger
-from flightControl.interface.interface import Interface
 
 
 class FlightController:
-
-    def __init__(self):
+    def __init__(self, interface):
+        self.util_handler = None
         self.control_modes = None
-        self.control_modes_name_list = None
-        self.interface = Interface()
+        self.control_modes_index_table = None
+        self.interface = interface
         self.logger = Logger()
         self.running = False
 
     def init(self):
+        if self.util_handler is None:
+            raise Exception('FlightController no handler assigned')
+
         self.control_modes = []
         self.control_modes.append(ALT(self))
         self.control_modes.append(VS(self))
@@ -31,16 +34,21 @@ class FlightController:
         self.control_modes.append(APP(self))
         self.control_modes.append(TOGA(self))
 
-        self.control_modes_name_list = []
-        for mode in self.control_modes:
-            self.control_modes_name_list.append(type(mode).__name__)
+        self.control_modes_index_table = {}
+        for i in range(len(self.control_modes)):
+            name = type(self.control_modes[i]).__name__
+            self.control_modes_index_table.update({name: i})
 
     def is_running(self):
         return self.running
 
+    def set_handler(self, handler):
+        self.util_handler = handler
+
     def start(self):
         self.init()
         self.running = True
+        self.push_state_update("running", True)
         try:
             self.control_loop()
         except Exception as e:
@@ -55,17 +63,16 @@ class FlightController:
 
     def stop(self):
         self.running = False
+        self.push_state_update("running", False)
         self.logger.save()
 
-    def mode_is_on(self, name):
-        for mode in self.control_modes:
-            if type(mode).__name__ == name:
-                return mode.is_on()
-        return False
-
     def toggle_mode(self, name):
-        for mode in self.control_modes:
-            if type(mode).__name__ == name:
-                successful = mode.toggle()
-                return successful
-        return False
+        index = self.control_modes_index_table[name]
+        self.control_modes[index].toggle()
+
+    def set_mode(self, name, val):
+        index = self.control_modes_index_table[name]
+        self.control_modes[index].set(val)
+
+    def push_state_update(self, name, state):
+        self.util_handler.receive_state_update(name, state)

@@ -51,5 +51,8 @@ class Controller:
     def apply_output(self, output):
         raise Exception('please override this method')
 
+    def reset(self):
+        self.pid.reset()
+
     def log_data(self, data_type, content):
         self.logger.update(self.name, data_type, content)

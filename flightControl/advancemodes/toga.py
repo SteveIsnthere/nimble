@@ -1,7 +1,6 @@
 from flightControl.compoents.advancemode import AdvanceMode
-from flightControl.controllers.lowLevelControllers.rollController import RollController
 from flightControl.controllers.lowLevelControllers.pitchController import PitchController
-from flightControl.controllers.lowLevelControllers.speedController import SpeedController
+from flightControl.controllers.lowLevelControllers.rollController import RollController
 
 
 class TOGA(AdvanceMode):
@@ -10,7 +9,6 @@ class TOGA(AdvanceMode):
 
     def __init__(self, flight_controller):
         super().__init__(flight_controller)
-        self.toggled_on = True
         self.roll_controller = RollController(self.interface, self.logger)
         self.pitch_controller = PitchController(self.interface, self.logger)
 
@@ -18,3 +16,10 @@ class TOGA(AdvanceMode):
         self.roll_controller.update(0)
         self.pitch_controller.update(self.TOGA_PITCH)
         self.interface.set_throttle(self.TOGA_THRUST)
+
+    def toggle_logic(self):
+        self.turn_off_other_modes_when_turn_on()
+        self.toggled_on = not self.toggled_on
+        if self.toggled_on:
+            self.roll_controller.reset()
+            self.pitch_controller.reset()

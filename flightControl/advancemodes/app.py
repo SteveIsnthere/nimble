@@ -8,3 +8,7 @@ class APP(AdvanceMode):
 
     def control(self):
         return
+
+    def toggle_logic(self):
+        self.turn_off_other_modes_when_turn_on()
+        self.toggled_on = not self.toggled_on

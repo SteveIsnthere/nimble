@@ -150,4 +150,3 @@ class Logger:
         self.serialize(path + "/" + "serialized")
         self.save_to_pdf(path + "/" + "plots")
         print("saved as " + path)
-

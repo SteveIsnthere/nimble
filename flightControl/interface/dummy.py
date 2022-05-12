@@ -1,4 +1,4 @@
-class Interface:
+class Dummy_Interface:
     @property
     def roll(self):
         return 0

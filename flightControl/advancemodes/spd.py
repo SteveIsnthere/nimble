@@ -12,6 +12,14 @@ class SPD(AdvanceMode):
     def control(self):
         self.speed_controller.update(self.target_speed)
 
+    def toggle_logic(self):
+        if not self.toggled_on:
+            self.speed_controller.reset()
+            for mode in self.flight_controller.control_modes:
+                if type(mode).__name__ in ["NAV", "APP", "TOGA"] and mode.is_on():
+                    mode.toggle()
+        self.toggled_on = not self.toggled_on
+
     def set(self, target_speed) -> bool:
         self.target_speed = target_speed
         return True

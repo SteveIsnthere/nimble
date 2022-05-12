@@ -14,6 +14,14 @@ class HDG(AdvanceMode):
     def control(self):
         self.heading_controller.update(self.target_heading)
 
+    def toggle_logic(self):
+        if not self.toggled_on:
+            self.heading_controller = HeadingController(self.interface, self.logger)
+            for mode in self.flight_controller.control_modes:
+                if type(mode).__name__ in ["NAV", "APP", "TOGA"] and mode.is_on():
+                    mode.toggle()
+        self.toggled_on = not self.toggled_on
+
     def set(self, target_heading) -> bool:
         if self.MIN_HEADING <= target_heading <= self.MAX_HEADING:
             self.target_heading = target_heading

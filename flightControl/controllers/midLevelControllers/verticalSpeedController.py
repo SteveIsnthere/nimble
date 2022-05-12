@@ -15,7 +15,7 @@ class VerticalSpeedController(Controller):
         self.last_altitude = 0
         self.current_vs = 0
         self.last_vs = 0
-        self.pid.tunings = (2, 0.1, 0.02)
+        self.pid.tunings = (1.5, 0.05, 0.01)
 
     def get_current_reading(self):
         self.last_altitude = self.current_altitude

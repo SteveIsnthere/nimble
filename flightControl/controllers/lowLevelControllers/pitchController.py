@@ -8,7 +8,7 @@ class PitchController(Controller):
     def __init__(self, interface, logger):
         super().__init__("PitchController", interface, logger, self.default_elevator_min_output,
                          self.default_elevator_max_output)
-        self.pid.tunings = (0.03, 0.002, 0.01)
+        self.pid.tunings = (0.03, 0.005, 0.01)
 
     @property
     def current_reading_change_rate(self):

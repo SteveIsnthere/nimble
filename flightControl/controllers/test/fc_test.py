@@ -26,5 +26,4 @@ while data_points_count < data_points_needed:
     interface.update()
     test_controller.update(target)
 
-
 logger.save()

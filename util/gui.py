@@ -1,115 +1,190 @@
 import tkinter as tk
 
+from util.command_handler import CommandHandler
 
-class UI:
+
+class UI(CommandHandler):
     def __init__(self, handler):
-        self.handler = handler
+        super().__init__(handler)
+        self.man_button = None
+        self.toggle_button = None
+        self.toga_button = None
+        self.vs_button = None
+        self.vs_input = None
+        self.vs_input_var = None
+        self.hdg_button = None
+        self.hdg_input = None
+        self.hdg_input_var = None
+        self.app_button = None
+        self.nav_button = None
+        self.alt_button = None
+        self.alt_input = None
+        self.alt_input_var = None
+        self.spd_input_var = None
+        self.gui = None
+        self.spd_button = None
+        self.spd_input = None
 
-        gui = tk.Tk()
-        gui.config(padx=6, pady=6)
-        gui.title("Nimble GUI")
+        self.button_on_color = "green"
+        self.button_off_color = "red"
+
+    def start(self):
+        self.gui = tk.Tk()
+        # gui.overrideredirect(True)
+        self.gui.config(padx=6, pady=6)
+        self.gui.title("Nimble GUI")
 
         # spd
-        spd_input_var = tk.StringVar()
-        spd_input_var.set("0")
-        spd_input = tk.Entry(gui, textvariable=spd_input_var)
-        spd_input.grid(row=0, column=0, columnspan=1)
+        self.spd_input_var = tk.StringVar()
+        self.spd_input_var.set("0")
+        self.spd_input = tk.Entry(self.gui, textvariable=self.spd_input_var)
+        self.spd_input.grid(row=0, column=0, columnspan=1)
 
         def spd():
-            speed = float(spd_input_var.get())
-            print(speed)
+            self.toggle_mode("SPD")
 
-        spd_button = tk.Button(gui, text="SPD", command=spd)
-        spd_button.grid(row=1, column=0, columnspan=1)
+        self.spd_button = tk.Button(self.gui, text="SPD", command=spd)
+        self.spd_button.grid(row=1, column=0, columnspan=1)
 
         # alt
-        alt_input_var = tk.StringVar()
-        alt_input_var.set("0")
-        alt_input = tk.Entry(gui, textvariable=alt_input_var)
-        alt_input.grid(row=0, column=1, columnspan=1)
+        self.alt_input_var = tk.StringVar()
+        self.alt_input_var.set("0")
+        self.alt_input = tk.Entry(self.gui, textvariable=self.alt_input_var)
+        self.alt_input.grid(row=0, column=1, columnspan=1)
 
         def alt():
-            altitude = float(alt_input_var.get())
-            print(altitude)
+            self.toggle_mode("ALT")
 
-        alt_button = tk.Button(gui, text="ALT", command=alt)
-        alt_button.grid(row=1, column=1, columnspan=1)
+        self.alt_button = tk.Button(self.gui, text="ALT", command=alt)
+        self.alt_button.grid(row=1, column=1, columnspan=1)
 
         # nav
         def nav():
-            print("nav")
+            self.toggle_mode("NAV")
 
-        nav_button = tk.Button(gui, text="NAV", command=nav)
-        nav_button.grid(row=0, column=2, columnspan=1)
+        self.nav_button = tk.Button(self.gui, text="NAV", command=nav)
+        self.nav_button.grid(row=0, column=2, columnspan=1)
 
         # app
         def app():
-            print("nav")
+            self.toggle_mode("APP")
 
-        app_button = tk.Button(gui, text="APP", command=app)
-        app_button.grid(row=1, column=2, columnspan=1)
+        self.app_button = tk.Button(self.gui, text="APP", command=app)
+        self.app_button.grid(row=1, column=2, columnspan=1)
 
         # hdg
-        hdg_input_var = tk.StringVar()
-        hdg_input_var.set("0")
-        hdg_input = tk.Entry(gui, textvariable=hdg_input_var)
-        hdg_input.grid(row=0, column=3, columnspan=1)
+        self.hdg_input_var = tk.StringVar()
+        self.hdg_input_var.set("0")
+        self.hdg_input = tk.Entry(self.gui, textvariable=self.hdg_input_var)
+        self.hdg_input.grid(row=0, column=3, columnspan=1)
 
         def hdg():
-            altitude = float(alt_input_var.get())
-            print(altitude)
+            self.toggle_mode("HDG")
 
-        hdg_button = tk.Button(gui, text="HDG", command=hdg)
-        hdg_button.grid(row=1, column=3, columnspan=1)
+        self.hdg_button = tk.Button(self.gui, text="HDG", command=hdg)
+        self.hdg_button.grid(row=1, column=3, columnspan=1)
 
         # vs
-        vs_input_var = tk.StringVar()
-        vs_input_var.set("0")
-        vs_input = tk.Entry(gui, textvariable=vs_input_var)
-        vs_input.grid(row=0, column=4, columnspan=1)
+        self.vs_input_var = tk.StringVar()
+        self.vs_input_var.set("0")
+        self.vs_input = tk.Entry(self.gui, textvariable=self.vs_input_var)
+        self.vs_input.grid(row=0, column=4, columnspan=1)
 
         def vs():
-            altitude = float(alt_input_var.get())
-            print(altitude)
+            self.toggle_mode("VS")
 
-        vs_button = tk.Button(gui, text="VS", command=vs)
-        vs_button.grid(row=1, column=4, columnspan=1)
+        self.vs_button = tk.Button(self.gui, text="VS", command=vs)
+        self.vs_button.grid(row=1, column=4, columnspan=1)
 
         # toga
         def toga():
-            print("toga")
+            self.toggle_mode("TOGA")
 
-        toga_button = tk.Button(gui, text="TOGA", command=toga)
-        toga_button.grid(row=2, column=0, columnspan=2, rowspan=2)
+        self.toga_button = tk.Button(self.gui, text="TOGA", command=toga)
+        self.toga_button.grid(row=2, column=0, columnspan=2, rowspan=2)
 
         # toggle
         def config_toggle_btn():
-            controller_on = handler.controller_state()
+            controller_on = self.handler.is_controller_on()
             if controller_on:
-                toggle_button.config(foreground="green", text="ON")
+                self.toggle_button.config(foreground="green", text="ON")
             else:
-                toggle_button.config(foreground="red", text="OFF")
+                self.toggle_button.config(foreground="red", text="OFF")
 
         def toggle():
-            controller_on = handler.controller_state()
+            controller_on = self.handler.is_controller_on()
             if controller_on:
-                handler.switch_off_controller()
+                self.handler.switch_off_controller()
             else:
-                handler.switch_on_controller()
-            config_toggle_btn()
+                self.handler.switch_on_controller()
 
-        toggle_button = tk.Button(gui, text="toggle", command=toggle)
+        self.toggle_button = tk.Button(self.gui, text="toggle", command=toggle)
         config_toggle_btn()
-        toggle_button.grid(row=2, column=2, columnspan=1)
+        self.toggle_button.grid(row=2, column=2, columnspan=1)
 
         # man
         def man():
-            print("toggle")
+            self.toggle_mode("MAN")
 
-        man_button = tk.Button(gui, text="MAN", command=man)
-        man_button.grid(row=2, column=3, columnspan=2, rowspan=2)
+        self.man_button = tk.Button(self.gui, text="MAN", command=man)
+        self.man_button.grid(row=2, column=3, columnspan=2, rowspan=2)
 
-        for entry in (spd_input, alt_input, hdg_input, vs_input):
+        for entry in (self.spd_input, self.alt_input, self.hdg_input, self.vs_input):
             entry.config(justify=tk.CENTER, width=7)
 
-        gui.mainloop()
+        self.gui.bind('<Return>', self.return_event)
+
+        self.gui.mainloop()
+
+    def receive_update(self, name, state):
+        if name == "ALT":
+            if state:
+                self.alt_button.config(foreground=self.button_on_color)
+            else:
+                self.alt_button.config(foreground=self.button_off_color)
+        elif name == "VS":
+            if state:
+                self.vs_button.config(foreground=self.button_on_color)
+            else:
+                self.vs_button.config(foreground=self.button_off_color)
+        elif name == "HDG":
+            if state:
+                self.hdg_button.config(foreground=self.button_on_color)
+            else:
+                self.hdg_button.config(foreground=self.button_off_color)
+        elif name == "SPD":
+            if state:
+                self.spd_button.config(foreground=self.button_on_color)
+            else:
+                self.spd_button.config(foreground=self.button_off_color)
+        elif name == "MAN":
+            if state:
+                self.man_button.config(foreground=self.button_on_color)
+            else:
+                self.man_button.config(foreground=self.button_off_color)
+        elif name == "NAV":
+            if state:
+                self.nav_button.config(foreground=self.button_on_color)
+            else:
+                self.nav_button.config(foreground=self.button_off_color)
+        elif name == "APP":
+            if state:
+                self.app_button.config(foreground=self.button_on_color)
+            else:
+                self.app_button.config(foreground=self.button_off_color)
+        elif name == "TOGA":
+            if state:
+                self.toga_button.config(foreground=self.button_on_color)
+            else:
+                self.toga_button.config(foreground=self.button_off_color)
+        elif name == "running":
+            if state:
+                self.toggle_button.config(foreground=self.button_on_color, text="ON")
+            else:
+                self.toggle_button.config(foreground=self.button_off_color, text="OFF")
+
+    def return_event(self, e):
+        self.set_mode("VS", float(self.vs_input.get()))
+        self.set_mode("ALT", float((self.alt_input.get())))
+        self.set_mode("SPD", float((self.spd_input.get())))
+        self.set_mode("HDG", float((self.hdg_input.get())))
