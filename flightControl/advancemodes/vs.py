@@ -3,8 +3,8 @@ from flightControl.controllers.midLevelControllers.verticalSpeedController impor
 
 
 class VS(AdvanceMode):
-    MAX_VS = 100
-    MIN_VS = -100
+    MAX_VS = 200
+    MIN_VS = -200
     target_vs = 0
 
     def __init__(self, flight_controller):

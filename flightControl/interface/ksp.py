@@ -64,11 +64,17 @@ class KSP_Interface(Interface):
     def g_force(self):
         return self.vessel.flight().g_force
 
-    def set_pitch(self, output):
+    def set_elevator(self, output):
         self.vessel.control.pitch = output
 
-    def set_roll(self, output):
+    def set_aileron(self, output):
         self.vessel.control.roll = output
 
     def set_throttle(self, output):
         self.vessel.control.throttle = output
+
+    def update(self):
+        pass
+
+    def init(self):
+        pass

@@ -20,5 +20,5 @@ class PitchController(Controller):
     def apply_output(self, output):
         self.log_data("reading", self.currentReading)
         self.log_data("output", output)
-        self.interface.set_pitch(output)
+        self.interface.set_elevator(output)
         return

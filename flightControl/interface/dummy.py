@@ -1,4 +1,7 @@
-class Dummy_Interface:
+from flightControl.interface.interface import Interface
+
+
+class DummyInterface(Interface):
     @property
     def roll(self):
         return 0
@@ -35,9 +38,9 @@ class Dummy_Interface:
     def horizontal_speed(self):
         return 0
 
-    # @property
-    # def vertical_speed(self):
-    #     return self.flight.vertical_speed
+    @property
+    def vertical_speed(self):
+        return 0
 
     @property
     def longitude(self):
@@ -58,4 +61,10 @@ class Dummy_Interface:
         pass
 
     def set_throttle(self, output):
+        pass
+
+    def update(self):
+        pass
+
+    def init(self):
         pass

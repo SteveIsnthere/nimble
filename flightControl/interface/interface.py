@@ -1,61 +1,72 @@
 class Interface:
+    stall = False
+    g_overload = False
+    home_point_position = None  # [0, 0]
+    home_point_alt = None  # 0
+
     @property
     def roll(self):
-        return 0
+        raise Exception('Interface not implemented')
 
     @property
     def pitch(self):
-        return 0
+        raise Exception('Interface not implemented')
 
     @property
     def heading(self):
-        return 0
+        raise Exception('Interface not implemented')
+
+    @property
+    def heading_gps(self):
+        raise Exception('Interface not implemented')
 
     @property
     def roll_velocity(self):
-        return 0
+        raise Exception('Interface not implemented')
 
     @property
     def pitch_velocity(self):
-        return 0
+        raise Exception('Interface not implemented')
 
     @property
-    def yaw_velocity(self):
-        return 0
+    def turn_velocity(self):
+        raise Exception('Interface not implemented')
 
     @property
     def altitude(self):
-        return 0
+        raise Exception('Interface not implemented')
 
     @property
     def temperature(self):
-        return 15
+        raise Exception('Interface not implemented')
 
     @property
     def horizontal_speed(self):
-        return 0
-
-    # @property
-    # def vertical_speed(self):
-    #     return self.flight.vertical_speed
+        raise Exception('Interface not implemented')
 
     @property
-    def longitude(self):
-        return 0
+    def vertical_speed(self):
+        raise Exception('Interface not implemented')
 
     @property
-    def latitude(self):
-        return 0
+    def position(self):
+        raise Exception('Interface not implemented')
 
     @property
     def g_force(self):
-        return 0
+        raise Exception('Interface not implemented')
 
-    def set_pitch(self, output):
-        pass
+    def set_elevator(self, output):
+        raise Exception('Interface not implemented')
 
-    def set_roll(self, output):
-        pass
+    def set_aileron(self, output):
+        raise Exception('Interface not implemented')
 
     def set_throttle(self, output):
-        pass
+        raise Exception('Interface not implemented')
+
+    def update(self):
+        raise Exception('Interface not implemented')
+
+    def init(self):
+        raise Exception('Interface not implemented')

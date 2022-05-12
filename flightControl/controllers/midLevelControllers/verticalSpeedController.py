@@ -4,8 +4,8 @@ from flightControl.controllers.lowLevelControllers.pitchController import PitchC
 
 class VerticalSpeedController(Controller):
     # feed:VerticalSpeed out:pitch
-    default_min_output = -35
-    default_max_output = 35
+    default_min_output = -30
+    default_max_output = 30
 
     def __init__(self, interface, logger):
         super().__init__("VerticalSpeedController", interface, logger, self.default_min_output,

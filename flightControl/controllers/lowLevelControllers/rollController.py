@@ -20,5 +20,5 @@ class RollController(Controller):
     def apply_output(self, output):
         self.log_data("reading", self.currentReading)
         self.log_data("output", output)
-        self.interface.set_roll(output)
+        self.interface.set_aileron(output)
         return

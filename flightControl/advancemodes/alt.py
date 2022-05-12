@@ -4,8 +4,8 @@ from flightControl.controllers.highLevelController.altitudeController import Alt
 
 class ALT(AdvanceMode):
     MAX_ALT = 50000
-    MIN_ALT = -200
-    target_altitude = 1000
+    MIN_ALT = -1000
+    target_altitude = 5000
 
     def __init__(self, flight_controller):
         super().__init__(flight_controller)

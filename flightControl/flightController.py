@@ -23,7 +23,6 @@ class FlightController:
     def init(self):
         if self.util_handler is None:
             raise Exception('FlightController no handler assigned')
-
         self.control_modes = []
         self.control_modes.append(ALT(self))
         self.control_modes.append(VS(self))
@@ -46,6 +45,7 @@ class FlightController:
         self.util_handler = handler
 
     def start(self):
+        self.interface.init()
         self.init()
         self.running = True
         self.push_state_update("running", True)
@@ -58,6 +58,7 @@ class FlightController:
     def control_loop(self):
         while self.running:
             time.sleep(0.01)
+            self.interface.update()
             for mode in self.control_modes:
                 mode.update()
 
