@@ -1,72 +1,98 @@
+from abc import abstractmethod
+
+
 class Interface:
-    stall = False
-    g_overload = False
-    home_point_position = None  # [0, 0]
+    DEFAULT_FETCH_DATA_FREQUENCY = 100
+    IMU_FETCH_DATA_FREQUENCY = DEFAULT_FETCH_DATA_FREQUENCY
+    GPS_FETCH_DATA_FREQUENCY = DEFAULT_FETCH_DATA_FREQUENCY
+    BAROMETER_FETCH_DATA_FREQUENCY = DEFAULT_FETCH_DATA_FREQUENCY
+
+    stalling = False
+    g_overloading = False
+    home_point_pos = None  # [0, 0]
     home_point_alt = None  # 0
 
-    @property
-    def roll(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def pitch(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def heading(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def heading_gps(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def roll_velocity(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def pitch_velocity(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def turn_velocity(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def altitude(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def temperature(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def horizontal_speed(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def vertical_speed(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def position(self):
-        raise Exception('Interface not implemented')
-
-    @property
-    def g_force(self):
-        raise Exception('Interface not implemented')
-
-    def set_elevator(self, output):
-        raise Exception('Interface not implemented')
-
-    def set_aileron(self, output):
-        raise Exception('Interface not implemented')
-
-    def set_throttle(self, output):
-        raise Exception('Interface not implemented')
-
-    def update(self):
-        raise Exception('Interface not implemented')
-
+    @abstractmethod
     def init(self):
-        raise Exception('Interface not implemented')
+        pass
+
+    @abstractmethod
+    def update(self):
+        pass
+
+    @property
+    @abstractmethod
+    def roll(self):
+        pass
+
+    @property
+    @abstractmethod
+    def pitch(self):
+        pass
+
+    @property
+    @abstractmethod
+    def heading(self):
+        pass
+
+    @property
+    @abstractmethod
+    def heading_gps(self):
+        pass
+
+    @property
+    @abstractmethod
+    def roll_velocity(self):
+        pass
+
+    @property
+    @abstractmethod
+    def pitch_velocity(self):
+        pass
+
+    @property
+    @abstractmethod
+    def turn_velocity(self):
+        pass
+
+    @property
+    @abstractmethod
+    def altitude(self):
+        pass
+
+    @property
+    @abstractmethod
+    def temperature(self):
+        pass
+
+    @property
+    @abstractmethod
+    def horizontal_speed(self):
+        pass
+
+    @property
+    @abstractmethod
+    def vertical_speed(self):
+        pass
+
+    @property
+    @abstractmethod
+    def position(self):
+        pass
+
+    @property
+    @abstractmethod
+    def g_load(self):
+        pass
+
+    @abstractmethod
+    def set_elevator(self, output):
+        pass
+
+    @abstractmethod
+    def set_aileron(self, output):
+        pass
+
+    @abstractmethod
+    def set_throttle(self, output):
+        pass

@@ -51,7 +51,7 @@ class DummyInterface(Interface):
         return 0
 
     @property
-    def g_force(self):
+    def g_load(self):
         return 0
 
     def set_pitch(self, output):

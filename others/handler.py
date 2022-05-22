@@ -1,17 +1,15 @@
 import threading
+from abc import abstractmethod
 
-from util.gui import UI
 
-
-class UtilHandler:
-
+class Handler:
     def __init__(self, controller):
         self.controller = controller
         self.controller.set_handler(self)
-        self.command_handler = UI(self)
 
+    @abstractmethod
     def start(self):
-        self.command_handler.start()
+        pass
 
     def is_controller_on(self):
         return self.controller.is_running()
@@ -24,8 +22,26 @@ class UtilHandler:
         if self.is_controller_on():
             self.controller.stop()
 
+    @abstractmethod
     def receive_state_update(self, name, state):
-        self.command_handler.receive_update(name, state)
+        if name == "ALT":
+            pass
+        elif name == "VS":
+            pass
+        elif name == "HDG":
+            pass
+        elif name == "SPD":
+            pass
+        elif name == "MAN":
+            pass
+        elif name == "NAV":
+            pass
+        elif name == "APP":
+            pass
+        elif name == "TOGA":
+            pass
+        elif name == "running":
+            pass
 
     def toggle_mode(self, name):
         self.controller.toggle_mode(name)

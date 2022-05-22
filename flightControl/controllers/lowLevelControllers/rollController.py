@@ -1,4 +1,4 @@
-from flightControl.compoents.controller import Controller
+from others.controller import Controller
 
 
 class RollController(Controller):
@@ -9,6 +9,7 @@ class RollController(Controller):
         super().__init__("RollController", interface, logger, self.default_aileron_min_output,
                          self.default_aileron_max_output)
         self.pid.tunings = (0.0055, 0.0002, 0.0005)
+        self.fetch_data_frequency = self.interface.IMU_FETCH_DATA_FREQUENCY
 
     @property
     def current_reading_change_rate(self):

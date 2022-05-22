@@ -1,4 +1,4 @@
-from flightControl.compoents.controller import Controller
+from others.controller import Controller
 from flightControl.controllers.midLevelControllers.turingSpeedController import TurningSpeedController
 
 
@@ -12,6 +12,7 @@ class HeadingController(Controller):
                          self.default_max_output)
         self.turningSpeedController = TurningSpeedController(interface, logger)
         self.pid.tunings = (0.4, 0, 0)
+        self.fetch_data_frequency = self.interface.GPS_FETCH_DATA_FREQUENCY
 
     def get_current_reading(self):
         return self.interface.heading

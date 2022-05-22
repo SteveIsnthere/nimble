@@ -1,9 +1,9 @@
 import tkinter as tk
 
-from util.command_handler import CommandHandler
+from others.handler import Handler
 
 
-class UI(CommandHandler):
+class GUI(Handler):
     def __init__(self, handler):
         super().__init__(handler)
         self.man_button = None
@@ -105,18 +105,18 @@ class UI(CommandHandler):
 
         # toggle
         def config_toggle_btn():
-            controller_on = self.handler.is_controller_on()
+            controller_on = self.is_controller_on()
             if controller_on:
                 self.toggle_button.config(foreground="green", text="ON")
             else:
                 self.toggle_button.config(foreground="red", text="OFF")
 
         def toggle():
-            controller_on = self.handler.is_controller_on()
+            controller_on = self.is_controller_on()
             if controller_on:
-                self.handler.switch_off_controller()
+                self.switch_off_controller()
             else:
-                self.handler.switch_on_controller()
+                self.switch_on_controller()
 
         self.toggle_button = tk.Button(self.gui, text="toggle", command=toggle)
         config_toggle_btn()
@@ -136,7 +136,7 @@ class UI(CommandHandler):
 
         self.gui.mainloop()
 
-    def receive_update(self, name, state):
+    def receive_state_update(self, name, state):
         if name == "ALT":
             if state:
                 self.alt_button.config(foreground=self.button_on_color)

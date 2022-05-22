@@ -6,7 +6,7 @@ import time
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
-from util.helpers import Helpers
+from others.helpers import Helpers
 
 
 class DataEntry:

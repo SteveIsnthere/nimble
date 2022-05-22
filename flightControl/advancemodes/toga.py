@@ -1,4 +1,4 @@
-from flightControl.compoents.advancemode import AdvanceMode
+from others.advancemode import AdvanceMode
 from flightControl.controllers.lowLevelControllers.pitchController import PitchController
 from flightControl.controllers.lowLevelControllers.rollController import RollController
 

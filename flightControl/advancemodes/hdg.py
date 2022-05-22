@@ -1,4 +1,4 @@
-from flightControl.compoents.advancemode import AdvanceMode
+from others.advancemode import AdvanceMode
 from flightControl.controllers.highLevelController.headingController import HeadingController
 
 

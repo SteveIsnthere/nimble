@@ -1,4 +1,4 @@
-from flightControl.compoents.controller import Controller
+from others.controller import Controller
 from flightControl.controllers.midLevelControllers.verticalSpeedController import VerticalSpeedController
 
 
@@ -12,6 +12,7 @@ class AltitudeController(Controller):
                          self.default_max_output)
         self.verticalSpeedController = VerticalSpeedController(interface, logger)
         self.pid.tunings = (0.25, 0, 0)
+        self.fetch_data_frequency = self.interface.BAROMETER_FETCH_DATA_FREQUENCY
 
     def get_current_reading(self):
         return self.interface.altitude

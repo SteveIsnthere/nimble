@@ -1,4 +1,4 @@
-from flightControl.compoents.controller import Controller
+from others.controller import Controller
 from flightControl.controllers.lowLevelControllers.pitchController import PitchController
 
 

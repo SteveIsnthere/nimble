@@ -1,4 +1,4 @@
-from flightControl.compoents.controller import Controller
+from others.controller import Controller
 from flightControl.controllers.lowLevelControllers.rollController import RollController
 
 
@@ -16,6 +16,7 @@ class TurningSpeedController(Controller):
         self.current_turning_speed = 0
         self.last_turning_speed = 0
         self.pid.tunings = (7, 0, 0.05)
+        self.fetch_data_frequency = self.interface.IMU_FETCH_DATA_FREQUENCY
 
     def get_current_reading(self):
         self.last_heading = self.current_heading

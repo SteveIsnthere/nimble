@@ -1,4 +1,4 @@
-from flightControl.compoents.controller import Controller
+from others.controller import Controller
 
 
 class PitchController(Controller):
@@ -9,6 +9,7 @@ class PitchController(Controller):
         super().__init__("PitchController", interface, logger, self.default_elevator_min_output,
                          self.default_elevator_max_output)
         self.pid.tunings = (0.03, 0.005, 0.01)
+        self.fetch_data_frequency = self.interface.IMU_FETCH_DATA_FREQUENCY
 
     @property
     def current_reading_change_rate(self):

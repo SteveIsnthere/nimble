@@ -13,7 +13,7 @@ from flightControl.compoents.logger import Logger
 
 class FlightController:
     def __init__(self, interface):
-        self.util_handler = None
+        self.handler = None
         self.control_modes = None
         self.control_modes_index_table = None
         self.interface = interface
@@ -21,7 +21,7 @@ class FlightController:
         self.running = False
 
     def init(self):
-        if self.util_handler is None:
+        if self.handler is None:
             raise Exception('FlightController no handler assigned')
         self.control_modes = []
         self.control_modes.append(ALT(self))
@@ -42,7 +42,7 @@ class FlightController:
         return self.running
 
     def set_handler(self, handler):
-        self.util_handler = handler
+        self.handler = handler
 
     def start(self):
         self.interface.init()
@@ -57,7 +57,7 @@ class FlightController:
 
     def control_loop(self):
         while self.running:
-            time.sleep(0.01)
+            time.sleep(0.003)
             self.interface.update()
             for mode in self.control_modes:
                 mode.update()
@@ -76,4 +76,4 @@ class FlightController:
         self.control_modes[index].set(val)
 
     def push_state_update(self, name, state):
-        self.util_handler.receive_state_update(name, state)
+        self.handler.receive_state_update(name, state)

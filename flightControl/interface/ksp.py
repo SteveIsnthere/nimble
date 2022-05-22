@@ -5,7 +5,7 @@ import krpc
 from flightControl.interface.interface import Interface
 
 
-class KSP_Interface(Interface):
+class KspInterface(Interface):
     def __init__(self):
         self.conn = krpc.connect(name='sim')
         self.vessel = self.conn.space_center.active_vessel
@@ -48,9 +48,13 @@ class KSP_Interface(Interface):
     def horizontal_speed(self):
         return self.flight.horizontal_speed
 
-    # @property
-    # def vertical_speed(self):
-    #     return self.flight.vertical_speed
+    @property
+    def vertical_speed(self):
+        return self.flight.vertical_speed
+
+    @property
+    def position(self):
+        raise Exception('Interface not implemented')
 
     @property
     def longitude(self):
@@ -61,7 +65,7 @@ class KSP_Interface(Interface):
         return self.vessel.flight().latitude
 
     @property
-    def g_force(self):
+    def g_load(self):
         return self.vessel.flight().g_force
 
     def set_elevator(self, output):

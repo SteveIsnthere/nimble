@@ -1,8 +1,8 @@
 from flightControl.flightController import FlightController
 from flightControl.interface.dummy import DummyInterface
-from util.utilHandler import UtilHandler
+from handler.gui import GUI
 
 interface = DummyInterface()
 controller = FlightController(interface)
-util_handler = UtilHandler(controller)
-util_handler.start()
+handler = GUI(controller)
+handler.start()

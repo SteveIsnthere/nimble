@@ -1,4 +1,4 @@
-from flightControl.compoents.controller import Controller
+from others.controller import Controller
 
 
 class SpeedController(Controller):
@@ -9,6 +9,7 @@ class SpeedController(Controller):
         super().__init__("SpeedController", interface, logger, self.default_throttle_min_output,
                          self.default_throttle_max_output)
         self.pid.tunings = (0.03, 0.001, 0.005)
+        self.fetch_data_frequency = self.interface.GPS_FETCH_DATA_FREQUENCY
 
     def get_current_reading(self):
         return self.interface.horizontal_speed
